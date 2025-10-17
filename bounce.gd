@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 @export var speed: Vector2 = Vector2(300, 300)
 var sprite_size: Vector2
 var screen_size: Vector2
+var bounce_sound: AudioStreamPlayer2D
 func _ready():
 	play()
 	
@@ -18,6 +19,9 @@ func _ready():
 	
 	# center
 	position = screen_size / 2
+	
+	# sound
+	bounce_sound = $BounceSound
 
 func _process(delta):
 	position += speed * delta
@@ -26,16 +30,26 @@ func _process(delta):
 	var min_pos = half_size
 	var max_pos = screen_size - half_size if centered else screen_size - sprite_size
 	
+	var bounced = false
+	
 	if position.x <= min_pos.x:
 		position.x = min_pos.x
 		speed.x = abs(speed.x)
+		bounced = true
 	elif position.x >= max_pos.x:
 		position.x = max_pos.x
 		speed.x = -abs(speed.x)
+		bounced = true
 	
 	if position.y <= min_pos.y:
 		position.y = min_pos.y
 		speed.y = abs(speed.y)
+		bounced = true
+		
 	elif position.y >= max_pos.y:
 		position.y = max_pos.y
 		speed.y = -abs(speed.y)
+		bounced = true
+		
+	if bounced:
+		bounce_sound.play()

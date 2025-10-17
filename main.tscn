@@ -1,6 +1,7 @@
-[gd_scene load_steps=52 format=3 uid="uid://btlevsn5fqaa6"]
+[gd_scene load_steps=54 format=3 uid="uid://btlevsn5fqaa6"]
 
 [ext_resource type="Texture2D" uid="uid://dwsmtoyx6jcqq" path="res://frames/frame_000.png" id="1_hrvbo"]
+[ext_resource type="Script" uid="uid://c1875pxwvokx4" path="res://main.gd" id="1_uypp3"]
 [ext_resource type="Texture2D" uid="uid://dvror3467a2se" path="res://frames/frame_001.png" id="2_uypp3"]
 [ext_resource type="Texture2D" uid="uid://dgj8p4vynaswn" path="res://frames/frame_002.png" id="3_blkrb"]
 [ext_resource type="Texture2D" uid="uid://bwjdnmr3u0wrn" path="res://frames/frame_003.png" id="4_abqjc"]
@@ -50,6 +51,7 @@
 [ext_resource type="Texture2D" uid="uid://cutg4vd8equpi" path="res://frames/frame_047.png" id="48_sn1fb"]
 [ext_resource type="Texture2D" uid="uid://bxkj844abvfl6" path="res://frames/frame_048.png" id="49_yvsr8"]
 [ext_resource type="Script" uid="uid://djwkfklnkg7ub" path="res://bounce.gd" id="50_vieuh"]
+[ext_resource type="AudioStream" uid="uid://dqk1qo15cmdn0" path="res://sound/bounce.mp3" id="52_blkrb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yjja3"]
 animations = [{
@@ -207,9 +209,13 @@ animations = [{
 }]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_uypp3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-8, 12)
 scale = Vector2(0.91012967, 1.0201536)
 sprite_frames = SubResource("SpriteFrames_yjja3")
 script = ExtResource("50_vieuh")
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="AnimatedSprite2D"]
+stream = ExtResource("52_blkrb")
